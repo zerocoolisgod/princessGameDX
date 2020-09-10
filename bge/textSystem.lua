@@ -10,7 +10,7 @@ local lgSetColor  = love.graphics.setColor
 local lgDrawRec   = love.graphics.rectangle
 local lgDraw      = love.graphics.draw
 
-local camera = CAMERA
+local camera = BGE.camera
 
 
 local textSystem = {}

@@ -4,12 +4,6 @@
 -- The majority of Game spacific Global Variables.
 -- The only table needed to ba saved and loaded for save/load functionality.
 -----------------------------
--- Localized Globals
-local gstMan = GSTMAN
-local entSys = ENTSYS
-local colSys = COLSYS
-local camera = CAMERA
-local resMan = RESMAN
 
 
 local g = {}

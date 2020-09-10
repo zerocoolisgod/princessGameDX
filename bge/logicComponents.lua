@@ -4,14 +4,14 @@
 
 -----------------------------
 -- Localized Globals
-local gameStateManager  = GSTMAN
-local entitySystem      = ENTSYS
-local collisionSystem   = COLSYS
-local camera            = CAMERA
-local resourceManager   = RESMAN
-local gameData          = GAMDAT
-local overWorld         = OVRWLD
-local inputs						= INPUTS
+local gameStateManager  = BGE.gameStateManager
+local entitySystem      = BGE.entitySystem
+local collisionSystem   = BGE.collisionSystem
+local camera            = BGE.camera
+local resourceManager   = BGE.resourceManager
+local gameData          = BGE.gameData
+local overWorld         = BGE.overWorld
+local inputs						= BGE.inputManager
 
 local logSys = {}
 
@@ -95,16 +95,6 @@ end
 
 
 function logSys:addMovement(ent)
-  if not COLSYS then 
-    love.errhand("COLSYS needs to be globally accessable!")
-    love.event.quit()
-  end
-  
-  if not ENTSYS then 
-    love.errhand("ENTSYS needs to be globally accessable!")
-    love.event.quit()
-  end
-   
 	-- spdX = spdX or 100
 	-- spdY = spdY or 100
 	ent._framAcum = 0
@@ -150,13 +140,13 @@ function logSys:addMovement(ent)
 		
 		self.pos.x = self.pos.x + (self.vel.x * dt)
 		if self.collidable then 
-			px = COLSYS:ckCollison(self, ENTSYS:getEnts())
+			px = collisionSystem:ckCollison(self, entitySystem:getEnts())
 		end
 		if px then self.pos.x = px.x end	
 	
     self.pos.y = self.pos.y + (self.vel.y * dt)
 		if self.collidable then 
-			py = COLSYS:ckCollison(self, ENTSYS:getEnts())
+			py = collisionSystem:ckCollison(self, entitySystem:getEnts())
 		end
 		if py then self.pos.y = py.y end
 

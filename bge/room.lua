@@ -7,16 +7,17 @@
 
 -----------------------------
 -- Localized Globals
-local gameStateManager  = GSTMAN
-local entitySystem      = ENTSYS
-local collisionSystem   = COLSYS
-local camera            = CAMERA
-local resourceManager   = RESMAN
-local gameData          = GAMDAT
-local overWorld         = OVRWLD
+local gameStateManager  = BGE.gameStateManager
+local entitySystem      = BGE.entitySystem
+local collisionSystem   = BGE.collisionSystem
+local camera            = BGE.camera
+local resourceManager   = BGE.resourceManager
+local gameData          = BGE.gameData
+local overWorld         = BGE.overWorld
+local inputs						= BGE.inputManager
 
-local logicComponents = require("bge.logicComponents")
-local renderComponents = require("bge.renderComponents")
+--local logicComponents = require("bge.logicComponents")
+--local renderComponents = require("bge.renderComponents")
 
 local lgDraw = love.graphics.draw
 
