@@ -1,9 +1,7 @@
--- boxShoot
+-- Princess Game DX
 
 -- Imports
-_CAMERA = require("bge.camera")
-_ENTSYS = require("bge.entitySystem")
-_INPUTS = require("bge.inputManager")
+BGE = require("bge.basicGameEngine")
 
 
 
@@ -39,6 +37,7 @@ function love.load(arg)
   local plr = newPlayer(16,16)
   _ENTSYS:addEntity(plr)
   _CAMERA:setFocus(plr)
+  makeWalls()
 end
 
 
@@ -110,4 +109,18 @@ function newPlayer(x,y)
   )
   
   return p
+end
+
+
+function newWall(x,y)
+  local e = _ENTSYS:newEnt(x,y,16,16)
+  e:addRectangle({0.2, 1, 0.2, 1})
+
+  return e
+end
+
+function makeWalls()
+  for x=0, 8 do
+    _ENTSYS:addEntity(newWall(x*16, 200))
+  end
 end
