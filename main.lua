@@ -67,6 +67,7 @@ end
 
 
 
+
 -------------------------------------------------------------------------------
 -- Entites
 -------------------------------------------------------------------------------
@@ -81,7 +82,7 @@ function newPlayer(x,y)
       local speedLimit = 130
       local xSpeed = 0
       local ySpeed = 0
-      local accel = 0.5
+      local accel = 0.05
       
       if BGE.inputManager:isDown("up") then ySpeed = -speedLimit end
       if BGE.inputManager:isDown("down") then ySpeed = speedLimit end
