@@ -1,17 +1,20 @@
 -----------------------------
 -- Import Engine as Globals
-local bge = {}
-bge.gameStateManager  = require("bge.gameStateSystem")
-bge.entitySystem      = require("bge.entitySystem")
-bge.collisionSystem   = require("bge.collisionSystem")
-bge.camera            = require("bge.camera")
-bge.resourceManager   = require("bge.resourceManager")
-bge.gameData          = require("bge.gameData")
-bge.overWorld         = require("bge.overworldMap")
-bge.inputManager      = require("bge.inputManager")
+BGE = {}
+BGE.gameStateManager  = require("bge.gameStateSystem")
+BGE.collisionSystem   = require("bge.collisionSystem")
+BGE.camera            = require("bge.camera")
+BGE.resourceManager   = require("bge.resourceManager")
+BGE.gameData          = require("bge.gameData")
+BGE.overWorld         = require("bge.overworldMap")
+BGE.inputManager      = require("bge.inputManager")
+BGE.entitySystem      = require("bge.entitySystem")
+BGE.logicComponents   = require("bge.logicComponents")
+BGE.renderComponents  = require("bge.renderComponents")
+BGE.entity            = require("bge.entity")
 
 
-function bge:load()
+function BGE:load()
   -- Scaling filter / Mouse Cursor Off
   love.graphics.setDefaultFilter('nearest')
   love.mouse.setVisible(false)
@@ -26,37 +29,41 @@ function bge:load()
   love.audio.setVolume(volume)
 end
 
-function bge:update(dt) end
-function bge:draw() end
+function BGE:update(dt) end
+function BGE:draw() end
 
-function bge:gsmUpdate(dt)
+
+--Using Game State Manager
+function BGE:gsmUpdate(dt)
   self.inputManager:update(dt)
   self.gameStateManager:updateEnts(dt)
   self.camera:update(dt)
 end
 
-function bge:gsmDraw()
+function BGE:gsmDraw()
   self.camera:set()
   self.gameStateManager:drawEnts()
   self.camera:unset()
 end
 
 
-function bge:statlessUpdate(dt)
+-- Using Statless update
+-- Easier for prototyping
+function BGE:statlessUpdate(dt)
   self.inputManager:update(dt)
   self.entitySystem:updateEnts(dt)
   self.camera:update(dt)
 end
 
 
-function bge:statlessDraw()
+function BGE:statlessDraw()
   self.camera:set()
   self.entitySystem:drawEnts()
   self.camera:unset()
 end
 
 
-function bge:setUseGameStates(ugs)
+function BGE:setUseGameStates(ugs)
   -- games states must be loaded before this is set
   self.update = self.statlessUpdate
   self.draw = self.statlessDraw
@@ -67,6 +74,6 @@ function bge:setUseGameStates(ugs)
   end
 end
 
-bge:setUseGameStates(false)
+BGE:setUseGameStates(false)
 
-return bge
+return BGE

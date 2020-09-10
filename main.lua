@@ -14,9 +14,6 @@ local lgScale = love.graphics.scale
 
 
 -- Localized Vars
-local why = "wtf"
-
-
 
 
 -------------------------------------------------------------------------------
@@ -74,20 +71,24 @@ end
 -- Entites
 -------------------------------------------------------------------------------
 function newPlayer(x,y)
-  local p = BGE.entitySystem:newEnt(x,y,16,16)
+  local p = BGE.entity:new(x,y,16,16)
   p:addRectangle({0.2, 0.2, 1, 1})
-  
+  p:addCollision(true)
+  p:addMovement()
+
   p:addOnUpdate(
     function(self, dt)
-      local nx,ny = self:getPosition()
-      local speed = 120
+      local speedLimit = 130
+      local xSpeed = 0
+      local ySpeed = 0
+      local accel = 0.5
       
-      if BGE.inputManager:isDown("up") then ny = ny - (speed * dt) end
-      if BGE.inputManager:isDown("down") then ny = ny + (speed * dt) end
-      if BGE.inputManager:isDown("left") then nx = nx - (speed * dt) end
-      if BGE.inputManager:isDown("right") then nx = nx + (speed * dt) end
+      if BGE.inputManager:isDown("up") then ySpeed = -speedLimit end
+      if BGE.inputManager:isDown("down") then ySpeed = speedLimit end
+      if BGE.inputManager:isDown("left") then xSpeed = -speedLimit end
+      if BGE.inputManager:isDown("right") then xSpeed = speedLimit end
       
-      self:setPosition(nx, ny)
+      self:move(xSpeed, ySpeed, accel, accel, dt)
     end
   )
   
@@ -96,7 +97,7 @@ end
 
 
 function newWall(x,y)
-  local e = BGE.entitySystem:newEnt(x,y,16,16)
+  local e = BGE.entity:new(x,y,16,16)
   e:addRectangle({0.2, 1, 0.2, 1})
   e:addCollision(true)
   return e
