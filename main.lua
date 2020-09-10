@@ -24,6 +24,7 @@ local lgScale = love.graphics.scale
 -- Load Function
 -------------------------------------------------------------------------------
 function love.load(arg)
+  
   -- Scaling filter / Mouse Cursor Off
   love.graphics.setDefaultFilter('nearest')
   love.mouse.setVisible(false)
