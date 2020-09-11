@@ -5,7 +5,7 @@ function love.conf(t)
     t.accelerometerjoystick = true      -- Enable the accelerometer on iOS and Android by exposing it as a Joystick (boolean)
     t.gammacorrect = false              -- Enable gamma-correct rendering, when supported by the system (boolean)
 
-    t.window.title = "Box Shooty"         -- The window title (string)
+    t.window.title = "Princess Game DX"         -- The window title (string)
     t.window.icon = nil                 -- Filepath to an image to use as the window's icon (string)
     t.window.width = 532                -- The window width (number)
     t.window.height = 300              -- The window height (number)

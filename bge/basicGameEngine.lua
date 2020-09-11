@@ -13,6 +13,7 @@ BGE.logicComponents   = require("bge.logicComponents")
 BGE.renderComponents  = require("bge.renderComponents")
 BGE.entity            = require("bge.entity")
 
+BGE._framAcum = 0 -- make this togelable like a vsync or something
 
 function BGE:load()
   -- Scaling filter / Mouse Cursor Off
@@ -50,9 +51,9 @@ end
 -- Using Statless update
 -- Easier for prototyping
 function BGE:statlessUpdate(dt)
-  self.inputManager:update(dt)
   self.entitySystem:updateEnts(dt)
   self.camera:update(dt)
+  self.inputManager:update(dt)
 end
 
 

@@ -95,8 +95,6 @@ end
 
 
 function logSys:addMovement(ent)
-	-- spdX = spdX or 100
-	-- spdY = spdY or 100
 	ent._framAcum = 0
 	ent.vel = {x = 0, y = 0}
 	ent.dir = {x = 1, y = 0}
@@ -109,12 +107,12 @@ function logSys:addMovement(ent)
 		-- velocity by an acceleration percentage accel of 1 changes immediately,
 		-- 0 is never, .5 half's the difference each tick.
 		
-		local tfps = (1/60)
-		self._framAcum = self._framAcum + dt
+		--local tfps = (1/60)
+		--self._framAcum = self._framAcum + dt
 		-- normalize the time step. With a fluxuating dt
 		-- accels get wierd.
-		if self._framAcum >= tfps then
-			self._framAcum = self._framAcum - tfps
+		--if self._framAcum >= tfps then
+		--	self._framAcum = self._framAcum - tfps
 			local curSpeedX = self.vel.x
 			local curSpeedY = self.vel.y
 			local threshold = 1   -- Lower to make more 'floaty'
@@ -131,7 +129,7 @@ function logSys:addMovement(ent)
 	
 			self.vel.x = curSpeedX
 			self.vel.y = curSpeedY
-		end
+		--end
 	end
 
 	
