@@ -1,15 +1,20 @@
 local ent = {}
 
 function ent:new (x,y)
-  local p = BGE.entity:new(x, y, 16, 16)
-  p:addRectangle({0.2, 0.2, 1, 1})
+  local p = BGE.entity:new(x, y, 4, 12)
+  
+  local imgSheet = BGE.resourceManager:getImage("beth_normal_strip")
+  p:addSprite(imgSheet, 16, 16, 1)
+  
+  p:addRectangle({1, 1, 0.1, 0.4})
+  p:setSpriteOffset(0,-1)
+
   p:addCollision(true)
   p:addMovement()
   p.gravity = 400
   p.acceleration = {x = 0.1, y = 0.01}
   p.maxSpeed = {x = 130, y =200}
   p.debugMsg = ""
-
 
   p:addOnUpdate(
     function(self, dt)
@@ -43,7 +48,7 @@ function ent:new (x,y)
     function(self)
       local x,y = self:getPosition()
       y = y - 8
-      love.graphics.print(self.debugMsg, x, y)
+      --love.graphics.print(self.debugMsg, x, y)
     end
   )
 

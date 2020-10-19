@@ -37,8 +37,8 @@ end
 
 
 function renSys:addSprite(ent, sheet, width, height, quad)
-  if not RESMAN then 
-    love.errhand("RESMAN needs to be globally accessable!")
+  if not BGE.resourceManager then 
+    love.errhand("BGE.resourceManager needs to be globally accessable!")
     love.event.quit()
   end
 
@@ -50,7 +50,7 @@ function renSys:addSprite(ent, sheet, width, height, quad)
 
 	ent.sheet = sheet
   ent.frame = quad or 1
-  ent.quads = RESMAN:getQuads(sheet, width, height, margin, spacing)
+  ent.quads = BGE.resourceManager:getQuads(sheet, width, height, margin, spacing)
 	ent.scale = {x = 1, y = 1}
 	ent.radian = 0
   ent.orig = {x = width/2, y = height/2}
