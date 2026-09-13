@@ -1,5 +1,7 @@
 -- Princess Game DX
 _USE_BUFFERED_SPRITESHEETS = true
+-- a little test
+
 
 -- Imports
 BGE = require("bge.basicGameEngine")
