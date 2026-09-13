@@ -24,7 +24,7 @@ function ent:new (x,y)
       local ySpeed = self.gravity
       local aclX = self.acceleration.x
       local aclY = self.acceleration.y
-
+      
       if self:onGround() then
         ySpeed = 0
         aclY = 0.5
