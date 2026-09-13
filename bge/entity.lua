@@ -104,8 +104,8 @@ function entity:new(x,y,w,h)
   end
   
   
-  function e:addState(id, init, state)
-    logicComponents:addState(self, id, init, state)
+  function e:addStates()
+    logicComponents:addStates(self)
   end
   
   

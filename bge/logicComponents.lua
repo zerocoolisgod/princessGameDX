@@ -15,16 +15,23 @@ local inputs						= BGE.inputManager
 
 local logSys = {}
 
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
 function logSys:addOnUpdate(ent, f)
 	-- Generic function to run every update
 	ent:_addLogSys(f)
 end
 
 
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
 function logSys:addInputs(ent)
 end
 
 
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
 function logSys:addAnimation(ent, aId, frms, dly)
 	if not ent.anms then ent.anms={} end
 	ent.anms[aId] = {
@@ -78,6 +85,8 @@ function logSys:addAnimation(ent, aId, frms, dly)
 end
 
 
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
 function logSys:addCollision(ent, solid)
 	-- Solid objects repell objects 
 	-- attempting to move into their 
@@ -94,6 +103,8 @@ function logSys:addCollision(ent, solid)
 end
 
 
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
 function logSys:addMovement(ent)
 	ent._framAcum = 0
 	ent.vel = {x = 0, y = 0}
@@ -152,25 +163,37 @@ function logSys:addMovement(ent)
 end
 
 
-function logSys:addState(ent, id, init, state)
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+function logSys:addStates(ent)
 	if not ent.stateInits then ent.stateInits={} end
-	ent.stateInits[id] = init
-
 	if not ent.states then ent.states={} end
-	ent.states[id] = state
-	
-	ent.cState = id -- Current State
-	ent.nState = id -- Next State
 		
-	ent.setState = function(self,s)
+	ent.cState = "" -- Current State
+	ent.nState = "" -- Next State
+		
+	ent.newState = function(self, id, init, state)
+		self.stateInits[id] = init
+    self.states[id] = state
+	
+    self.cState = id -- Current State
+    self.nState = id -- Next State
+	end
+  
+  ent.setState = function(self,s)
 		self.nState = s
+	end
+  
+  ent.getState = function(self)
+		return self.cState
 	end
 	
 	ent:_addLogSys(function(e, dt)
 		-- Check for state change, run initial
 		if e.cState ~= e.nState then
 			e.cState = e.nState
-			e.stateInits[e.cState](e) 
+			e.stateInits[e.cState](e)
+      print(e:getState())
 		end
 		
 		e.states[e.cState](e, dt)

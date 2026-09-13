@@ -1,11 +1,11 @@
 -- Princess Game DX
-_USE_BUFFERED_SPRITESHEETS = true
--- a little test
--- we testing again
+_USE_BUFFERED_SPRITESHEETS = false --Tiles are buffered but sprite sheets are not, fix later
+
 
 -- Imports
 BGE = require("bge.basicGameEngine")
 love.run = require("bge.customRun")
+
 
 -- Localized love
 local lgRect = love.graphics.rectangle
